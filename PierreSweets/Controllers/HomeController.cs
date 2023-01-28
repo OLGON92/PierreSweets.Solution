@@ -21,7 +21,7 @@ namespace PierreSweets.Controllers
     }
 
     [HttpGet("/")]
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
       Treat[] treats = _db.Treats.ToArray();
       Flavor[] flavors = _db.Flavors.ToArray();
