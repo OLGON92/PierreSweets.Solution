@@ -121,7 +121,7 @@ namespace PierreSweets.Controllers
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
       #nullable enable
-      TreatFlavor? joinEntity = _db.TreatFlavors.FirstOrDefault(join => (join.TreatId == treatId && join.TreatId == flavor.FlavorId));
+      TreatFlavor? joinEntity = _db.TreatFlavors.FirstOrDefault(join => (join.TreatId == treatId && join.FlavorId == flavor.FlavorId));
       #nullable disable
       if (joinEntity == null && treatId != 0)
       {
