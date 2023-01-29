@@ -19,17 +19,24 @@ else
   <ul>
     @foreach(TreatFlavor join in Model.JoinEntities)
     {
-      <li>Treats: @join.Treat.Name, Genre: @join.Treat.Description</li>
-      @using (Html.BeginForm("DeleteJoin", "Flavors"))
+      <li>Treats: @join.Treat.Name, Type: @join.Treat.Description</li>
+      @if (User.Identity.IsAuthenticated)
       {
-        @Html.Hidden("joinId", @join.TreatFlavorId)
-        <input type="submit" value="Delete" />
+        @using (Html.BeginForm("DeleteJoin", "Treats"))
+        {
+          @Html.Hidden("joinId", @join.TreatFlavorId)
+          <input type="submit" value="Delete" />
+        }
       }
-    }
+      else
+      {
+        <p>Please @Html.ActionLink("log in", "LogIn", "Account") to delete this treat.</p>
+      }
+    }  
   </ul>
 }
 
-<p>@Html.ActionLink("Edit Item", "Edit", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId })</p>
 <p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Add a book", "AddBook", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Add a treat", "AddTreat", new { id = Model.FlavorId })</p>
